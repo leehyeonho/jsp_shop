@@ -1,30 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-<!-- cos.jar À» »ç¿ëÇÏ±â ¶§¹®¿¡ multipart/form-data¸¦ »ç¿ë ÇÑ´Ù.
+<!-- cos.jar ì„ ì‚¬ìš©í•˜ê¸° ë•Œë¬¸ì— multipart/form-dataë¥¼ ì‚¬ìš© í•œë‹¤.
  -->
 <form action="board.do?cmd=fileupload" method="post" enctype="multipart/form-data">
 <table border=1>
 	<tr>
-		<td colspan=2 align=center><h3>ÆÄÀÏ ¾÷·Îµå Æû</h3></td>
+		<td colspan=2 align=center><h3>íŒŒì¼ ì—…ë¡œë“œ í¼</h3></td>
 	<tr>
-		<td>Á¦¸ñ : </td><td><input type="text" name="title"></td><br>
+		<td>ì œëª© : </td><td><input type="text" name="title"></td><br>
 	</tr>
 	<tr>
-		<td>Á¤º¸ : </td><td><input type="text" name="info"></td><br>
+		<td>ì •ë³´ : </td><td><input type="text" name="info"></td><br>
 	</tr>
 	<tr>
-		<td>ÀÌ¹ÌÁö : </td><td><input type="file" name="fileName"></td><br>
+		<td>ì´ë¯¸ì§€ : </td><td><input type="file" name="fileName"></td><br>
 	</tr>
 	<tr>
-		<td colspan=2 align=center><input type="submit" value="Àü¼Û"></td>
+		<td colspan=2 align=center><input type="submit" value="ì „ì†¡"></td>
 	</tr>
 </table>
 </form>

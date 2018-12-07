@@ -19,7 +19,7 @@ public class boardListAction implements ServiceInterface {
 		ArrayList<BoardDTO> data = BoardDAO.showBoard();
 		
 		request.setAttribute("list", data);
-		Forwardaction.setRedirect(true);
+		Forwardaction.setRedirect(false);
 		Forwardaction.setPath("boardList.jsp");
 		return Forwardaction;
 	}

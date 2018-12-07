@@ -59,9 +59,9 @@ public class boardFileUpLoadAction implements ServiceInterface {
 
 
 		// 게시물 객체 만들기
-		BoardDTO data = new BoardDTO(title,info,uploadPath+"/"+filename);
+		BoardDTO data = new BoardDTO(title,info,"./img/" + filename);
 		
-		System.out.println(uploadPath+"/"+filename);
+		System.out.println("./img/" + filename);
 		// DB에 넣기 
 		
 		// DAO를 통해서 DB에서 처리 하기 회원 가입 처리

@@ -10,6 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script type="text/javascript">
+
+function goUrl(url) {
+	location.href = url;
+}
+
+</script>
 <title>게시판</title>
 </head>
 <style>
@@ -31,13 +38,14 @@ A:hover { text-decoration : underline; color : black; font-size : 9pt; }
 
 
 <hr>
+<H1><a onclick="goUrl('board.do?cmd=boardForm')">글쓰기</a></H1>
 <table width=580 border=1 cellpadding=2 cellspacing=1 >
 
 <!-- 입력 부분 -->
 <% for(int i=0;i<list.size();i++) {
 %>
-<img src="<%=list.get(i).getPath()%>" width=151 height=138></img>
-<a href="jsp_view_form.jsp?id=<%= list.get(i).getId() %>">제목 : <%=list.get(i).getTitle()%> 정보 : <%=list.get(i).getInfo()%> 날짜 : <%=list.get(i).getDate()%></a>
+<img src="<%=list.get(i).getPath()%>" width=151 height=138></img><p>
+<a href="jsp_view_form.jsp?id=<%= list.get(i).getId() %>">제목 : <%=list.get(i).getTitle()%> 정보 : <%=list.get(i).getInfo()%> 날짜 : <%=list.get(i).getDate()%></a><p>
 <br>
 
 <%
