@@ -52,6 +52,11 @@ public class LoginController extends HttpServlet {
 				
 			} catch (Exception e) {}
 			break;
+		case "logout" :
+			forwardAction = new ServiceForward();
+			forwardAction.setRedirect(false);
+			forwardAction.setPath("/Login/logout.jsp");
+			break;
 		}
 		
 		if(forwardAction != null) {

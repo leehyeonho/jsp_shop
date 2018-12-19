@@ -31,6 +31,8 @@
 
 		<ul class="navbar-nav mr-auto">
 			<li><br></li>
+			<li class="nav-item"><a class="nav-link"
+				href="product.do?cmd=ProductList" target="f">상품</a></li>
 			<li class="nav-item" align="right">
 				<!-- Optional JavaScript --> <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -46,14 +48,14 @@
  	} else {
 
  		out.print("<a class=\"nav-link\">" + data.getId() + " 님</a>");
- 		out.print("</li><li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.jsp\">로그아웃</a></li>");
+ 		out.print("</li><li class=\"nav-item\"><a class=\"nav-link\" onclick=\"goUrl('login.do?cmd=logout')\">로그아웃</a></li>");
  	}
  %>
 			
 			<li class="nav-item"><a class="nav-link"
 				onclick="goUrl('member.do?cmd=myInfo')">내 정보</a></li>
 			<li class="nav-item"><a class="nav-link"
-				onclick="goUrl('member.do?cmd=myInfo')">장바구니</a></li>
+				onclick="goUrl('product.do?cmd=viewCart')">장바구니</a></li>
 			<li class="nav-item"><a class="nav-link"
 				onclick="goUrl('board.do?cmd=boardlist')">게시판</a></li>
 		</ul>

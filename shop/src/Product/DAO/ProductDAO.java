@@ -63,152 +63,44 @@ public class ProductDAO {
 	 * 
 	 * @return 신규추가결과
 	 */
-//	public void add() throws Exception {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		StringBuffer qry = null;
-//		try {
-//			// 데이터베이스 연결
-//			con = DBManager.get_DB_Connection();
-//
-//			// SQL문 작성
-//			qry = new StringBuffer(1024);
-//			qry.append("INSERT INTO products (product_id, product, model, seller, price, unit, delivery_term, ");
-//			qry.append("stock, image, status) ");
-//			qry.append("VALUES(product_id_seq.nextval , ?,?,?,?,?,?,?,?,?)");
-//
-//			ps = con.prepareStatement(qry.toString());
-//			setPS(ps, "add");
-//
-//			// SQL문 실행
-//			ps.executeUpdate();
-//			ps.close();
-//
-//			// 상품번호를 얻기위한 SQL문 작성
-//			ps = con.prepareStatement("select max(product_id) productId from products ");
-//			rs = ps.executeQuery();
-//
-//			// 상품번호 얻기
-//			while (rs.next()) {
-//				productId = rs.getInt("productId");
-//			}
-//
-//			rs.close();
-//			ps.close();
-//		} catch (Exception e) {
-//			throw e;
-//		} finally {
-//			try {
-//				if (rs != null)
-//					rs.close();
-//			} catch (SQLException sqle) {
-//			}
-//			try {
-//				if (ps != null)
-//					ps.close();
-//			} catch (SQLException sqle) {
-//			}
-//			try {
-//				if (con != null)
-//					con.close();
-//			} catch (SQLException sqle) {
-//			}
-//		}
-//	}
+	public static boolean addCart(String uId, String product_id) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		StringBuffer qry = null;
+		try {
+			// 데이터베이스 연결
+			con = DBManager.get_DB_Connection();
 
-	/**
-	 * 해당 상품번호의 상품내역 수정
-	 * 
-	 * @return 수정결과
-	 */
-//	public void modify() throws Exception {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		StringBuffer qry = null;
-//		try {
-//			// 데이터베이스 연결
-//			con = DBManager.get_DB_Connection();
-//
-//			// SQL문 작성
-//			qry = new StringBuffer(1024);
-//			qry.append("UPDATE products SET product = ?, model = ?, seller = ?, price = ?, unit = ?, ");
-//			qry.append("delivery_term = ?, stock = ?, image = ?, status = ? ");
-//			qry.append("WHERE product_id = ?");
-//
-//			ps = con.prepareStatement(qry.toString());
-//			setPS(ps, "modify");
-//
-//			// SQL문 실행
-//			ps.executeUpdate();
-//			ps.close();
-//		} catch (Exception e) {
-//			throw e;
-//		} finally {
-//			try {
-//				if (rs != null)
-//					rs.close();
-//			} catch (SQLException sqle) {
-//			}
-//			try {
-//				if (ps != null)
-//					ps.close();
-//			} catch (SQLException sqle) {
-//			}
-//			try {
-//				if (con != null)
-//					con.close();
-//			} catch (SQLException sqle) {
-//			}
-//		}
-//
-//	}
+			String s = new StringBuffer(",").append(product_id).toString();
 
-	/**
-	 * 해당 상품번호의 상품내역 삭제
-	 * 
-	 * @return 삭제결과
-	 */
-//	public void remove() throws Exception {
-//		Connection con = null;
-//		PreparedStatement ps = null;
-//		ResultSet rs = null;
-//		StringBuffer qry = null;
-//		try {
-//			// 데이터베이스 연결
-//			con = DBManager.get_DB_Connection();
-//
-//			// SQL문 작성
-//			qry = new StringBuffer(1024);
-//			qry.append("DELETE FROM products WHERE product_id = ?");
-//
-//			ps = con.prepareStatement(qry.toString());
-//			ps.setInt(1, productId);
-//
-//			// SQL문 실행
-//			ps.executeUpdate();
-//			ps.close();
-//		} catch (Exception e) {
-//			throw e;
-//		} finally {
-//			try {
-//				if (rs != null)
-//					rs.close();
-//			} catch (SQLException sqle) {
-//			}
-//			try {
-//				if (ps != null)
-//					ps.close();
-//			} catch (SQLException sqle) {
-//			}
-//			try {
-//				if (con != null)
-//					con.close();
-//			} catch (SQLException sqle) {
-//			}
-//		}
-//	}
+			// SQL문 작성
+			qry = new StringBuffer(1024);
+			qry.append("UPDATE userlist SET like_list = CONCAT( like_list, ? ) WHERE uId = ? ");
+
+			ps = con.prepareStatement(qry.toString());
+			ps.setString(1, s.trim());
+			ps.setString(2, uId.trim());
+			// SQL문 실행
+			ps.executeUpdate();
+			ps.close();
+			
+			return true;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException sqle) {
+			}
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException sqle) {
+			}
+		}
+	}
+
 
 	/**
 	 * 모든 상품리스트 검색
@@ -236,6 +128,70 @@ public class ProductDAO {
 
 			// SQL문 실행결과를 ProductBean 객체 배열에 저장
 			products = setValuesForFind(rs);
+
+			ps.close();
+			rs.close();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (SQLException sqle) {
+			}
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException sqle) {
+			}
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException sqle) {
+			}
+		}
+		return products;
+	}
+	
+	public static ArrayList<ProductDTO> cartList(String uId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		StringBuffer qry = null;
+		ArrayList<ProductDTO> products = new ArrayList<ProductDTO>();
+		try {
+			// 데이터베이스 연결
+			con = DBManager.get_DB_Connection();
+			ProductDTO product = null;
+			// SQL문 작성
+			qry = new StringBuffer(1024);
+			qry.append("select like_list from userlist where uId = ? ");
+
+			ps = con.prepareStatement(qry.toString());
+			ps.setString(1, uId.trim());
+			// SQL문 실행
+			rs = ps.executeQuery();
+			rs.next();
+			String s[] = rs.getString(1).split(",");
+			System.out.println(s[1]);
+			
+			for(int i=1;i<s.length;i++) {
+			
+			ps = con.prepareStatement("select * from products where product_id = ? ");
+			ps.setInt(1,  Integer.valueOf(s[i].toString().trim()));
+			// SQL문 실행
+			rs = ps.executeQuery();
+			
+			rs.next();
+				product = new ProductDTO();
+				product.setProductId(rs.getInt("product_id"));
+				product.setProduct(rs.getString("product"));
+				product.setPrice(rs.getDouble("price"));
+				product.setStock(rs.getInt("stock"));
+				product.setImage(rs.getString("image"));
+				product.setStatus(rs.getInt("status"));
+				products.add(product);
+			}
 
 			ps.close();
 			rs.close();
